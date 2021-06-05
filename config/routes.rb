@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post "/auth/sign_up", to: "users#sign_up"
   post "/goal", to: "users#add_new_goals"
   put "/goal/:id", to: "users#update_user_goal"
+  get "/user_info", to: "users#get_user_information"
 end

@@ -24,6 +24,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_user_information
+    if @current_api_user.present?
+      @goals = @current_api_user.goals
+      render template: '/users/user.json.jbuilder', status: 200
+    else
+      render json: {success: 'Goal added success fully'}, status: :ok
+    end
+  end
+
   def add_new_goals
     if @current_api_user.present?
       goal = Goal.create(user: @current_api_user, milestone: params[:milestone], description: params[:description])
@@ -39,7 +48,7 @@ class UsersController < ApplicationController
   def update_user_goal
     goal = Goal.find_by(id: params[:id])
     if goal && goal.update(milestone: params[:milestone],description: params[:description])
-      render json: { message: 'goal updated successfully', event_and_reminder: event_and_reminder }
+      render json: { message: 'goal updated successfully' }
     else
       render json: {erro: 'failed to update'}, status: 422
     end
