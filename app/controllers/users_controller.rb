@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       @goals = @current_api_user.goals
       render template: '/users/user.json.jbuilder', status: 200
     else
-      render json: {success: 'Goal added success fully'}, status: :ok
+      render json: {errors: ['login to add goals']}, status: :unauthorized
     end
   end
 
